@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearchDive</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col items-center mt-24">
+        <div class="text-6xl font-bold mb-8 text-blue-600">SearchDive</div>
+        <div class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
+            <form class="flex relative mb-6">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1116.65 4.35 7.5 7.5 0 0116.65 16.65z" />
+                    </svg>
+                </span>
+                <input id="searchInput" type="text" class="flex-grow pl-10 p-4 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search...">
+                <button id="next" type="submit" class="p-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-r-lg shadow-lg transition-transform transform hover:scale-105">Search</button>
+            </form>
+            <div class="flex justify-around">
+                <a id="google"  target="_blank" class="text-gray-500 hover:text-gray-700">
+                    <img src="{% static 'home/images/google-icon.png' %}" alt="Google" class="h-10 w-10">
+                </a>
+                <a id="bing" target="_blank" class="text-gray-500 hover:text-gray-700">
+                    <img src="{% static 'home/images/bing-icon.png' %}" alt="Bing" class="h-10 w-10">
+                </a>
+                <a id="yahoo" target="_blank" class="text-gray-500 hover:text-gray-700">
+                    <img src="{% static 'home/images/yahoo-icon.png' %}" alt="Yahoo" class="h-10 w-10"></a>
+                
+            </div>
+        </div>
+        
+    </div>
+</body>
+<script>
+    document.getElementById('google').addEventListener('click', function() {
+        let inputValue = document.getElementById('searchInput').value;
+        console.log(inputValue);
+        let googleSearchURL = 'https://www.google.com/search?q=' + encodeURIComponent(inputValue);
+
+        // Redirect to the Google search page
+        window.location.href = googleSearchURL;
+    });
+    document.getElementById('bing').addEventListener('click', function() {
+        let inputValue = document.getElementById('searchInput').value.trim;
+        console.log(inputValue);
+        let bingSearchURL = 'https://www.bing.com/search?q=' + encodeURIComponent(inputValue);
+
+        // Redirect to the Bing search page
+        window.location.href = bingSearchURL;
+    });
+    document.getElementById('yahoo').addEventListener('click', function() {
+        let inputValue = document.getElementById('searchInput').value.trim;
+        console.log(inputValue);
+        let yahooSearchURL = 'https://search.yahoo.com/search?p=' + encodeURIComponent(inputValue);
+
+        // Redirect to the Yahoo search page
+        window.location.href = yahooSearchURL;
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('next');
+
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleSearch();
+            }
+        }
+
+        function handleButtonClick(event) {
+            event.preventDefault();
+            handleSearch();
+        }
+
+        function handleSearch() {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `/?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        searchInput.addEventListener('keydown', handleEnterKey);
+        searchButton.addEventListener('click', handleButtonClick);
+    });
+</script>
+</html>
+
+
