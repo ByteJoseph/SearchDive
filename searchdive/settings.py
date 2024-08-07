@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i#=#0h0^00^n9e)i@v8%u(zyr89%@omrbmprapf166@q7m3h5a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'searchdive.wsgi.application'
+WSGI_APPLICATION = 'searchdive.wsgi.app'
 
 
 # Database
